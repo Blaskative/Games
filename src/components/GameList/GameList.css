@@ -1,0 +1,43 @@
+.container{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    margin-top: 100px;
+    margin-right: 280px;
+    margin-left: 280px;
+}
+
+
+.cards_container{
+    display: flex;
+    flex-wrap:wrap;
+    margin-top: 100px;
+    width: 100%;
+}
+.pagination{
+    list-style:none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+    font-size: 1.2rem;
+    gap: 5px;
+}
+
+.pagination .page-num{
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: 400;
+}
+
+.pagination .page-num:hover{
+    background-color: rgb(36,40,47);
+    color:rgb(204,204,204);
+}
+.pagination .page-num{
+    color:rgb(204,204,204);
+}
+.error{
+    color: red;
+}
