@@ -9,25 +9,50 @@ import GameSlider from "../GameSlider/GameSlider";
 
 const GameList = () => {
   const effectRan = useRef(false);
+  const effectRan2 = useRef(false);
   const [games, setGames] = useState([]);
+  const [gamesOnline, setGamesOnline] = useState([]);
   const [genres, setGenres] = useState([]);
   const [GamesByGenre, setGamesByGenre] = useState(null);
   const [gamesByPage, setgamesByPage] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 9;
+  const slideData = [
+    {
+      index: 0,
+      headline: "New Fashion Apparel",
+      src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/fashion.jpg",
+    },
+    {
+      index: 1,
+      headline: "In The Wilderness",
+      src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/forest.jpg",
+    },
+    {
+      index: 2,
+      headline: "For Your Current Mood",
+      src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/guitar.jpg",
+    },
+    {
+      index: 3,
+      headline: "Focus On The Writing",
+      src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/typewriter.jpg",
+    },
+  ];
 
   useEffect(() => {
     if (effectRan.current === true) {
       axios.get("http://localhost:4000/api").then((res) => {
         var data = JSON.parse(res.data);
         var gameListGenre = GamesByGenre
-          ? data.filter((game) => game.genre == GamesByGenre)
+          ? data.filter((game) => game.genre === GamesByGenre)
           : data;
-          gameListGenre= gameListGenre.sort(
-            (objA, objB) => Number(new Date(objB.release_date)) - Number(new Date(objA.release_date)),
-          );
-          console.log(gameListGenre);
+        gameListGenre = gameListGenre.sort(
+          (objA, objB) =>
+            Number(new Date(objB.release_date)) -
+            Number(new Date(objA.release_date))
+        );
         const genres = data.map((game) => game.genre);
         let genreList = genres.filter(
           (genre, index) => genres.indexOf(genre) === index
@@ -43,6 +68,24 @@ const GameList = () => {
       effectRan.current = true;
     };
   }, [itemOffset, itemsPerPage, GamesByGenre]);
+
+  useEffect(()=>{
+    if (effectRan2.current === true) {
+      axios.get("http://localhost:4000/online").then((res) => {
+        let data=JSON.parse(res.data);
+        let gamesMostPlayed= data.sort(
+          (objA, objB) =>
+            Number(objB.users) -
+            Number(new Date(objA.users))
+        );
+        console.log(gamesMostPlayed);
+        setGamesOnline(gamesMostPlayed);
+      });
+    }
+    return () => {
+      effectRan2.current = true;
+    };
+  },[])
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % games.length;
@@ -83,6 +126,7 @@ const GameList = () => {
         nextLinkClassName="page-num"
         activeLinkClassName="active"
       />
+      <GameSlider heading="Example Slider" slides={slideData} />
     </div>
   );
 };
