@@ -5,7 +5,6 @@ import TaBar from "../TaBar/TaBar";
 import axios from "axios";
 import "./GameList.css";
 import ReactPaginate from "react-paginate";
-import GameSlider from "../GameSlider/GameSlider";
 
 const GameList = () => {
   const effectRan = useRef(false);
