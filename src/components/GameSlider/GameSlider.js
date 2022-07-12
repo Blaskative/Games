@@ -50,6 +50,10 @@ import SliderControl from "./SliderControl/SliderControl";
     }
     
     return (
+      <div className="container_slider">
+        <h2>
+        <strong> Online Games </strong> 
+          </h2>
       <div className='slider' aria-labelledby={headingId}>
         <ul className="slider__wrapper" style={wrapperTransform}>
           <h3 id={headingId} className="visuallyhidden">{heading}</h3>
@@ -79,6 +83,7 @@ import SliderControl from "./SliderControl/SliderControl";
             handleClick={this.handleNextClick}
           />
         </div>
+      </div>
       </div>
     )
   }

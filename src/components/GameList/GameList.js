@@ -6,6 +6,7 @@ import axios from "axios";
 import "./GameList.css";
 import ReactPaginate from "react-paginate";
 import GameSlider from "../GameSlider/GameSlider";
+import Footer from "../Footer/Footer";
 
 const GameList = () => {
   const effectRan = useRef(false);
@@ -131,6 +132,7 @@ const GameList = () => {
         activeLinkClassName="active"
       />
       <GameSlider heading="Example Slider" slides={gamesOnline} />
+      <Footer/>
     </div>
   );
 };
