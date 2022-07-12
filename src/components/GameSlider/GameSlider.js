@@ -1,7 +1,7 @@
 import React from "react";
-import Slide from "./Slide";
-import SliderControl from "./SliderControl";
+import Slide from "./Slide/Slide";
 import "./GameSlider.css";
+import SliderControl from "./SliderControl/SliderControl";
 
  export default class GameSlider extends React.Component {
   constructor(props) {
@@ -42,11 +42,11 @@ import "./GameSlider.css";
   }
 
   render() {
-    const { current, direction } = this.state
+    const { current} = this.state
     const { slides, heading } = this.props 
     const headingId = `slider-heading__${heading.replace(/\s+/g, '-').toLowerCase()}`
     const wrapperTransform = {
-      'transform': `translateX(-${current * (100 / slides.length)}%)`
+      'transform': `translateX(-${current === 0 ? 20 : current === 1 ? 20: current * (100 / slides.length)}%)`
     }
     
     return (

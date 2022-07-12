@@ -7,6 +7,9 @@
   --base-duration: 600ms;
   --base-ease: cubic-bezier(0.25, 0.46, 0.45, 0.84);
 }
+::-webkit-scrollbar {
+  display: none;
+  }
 #app {
   align-items: center;
   display: flex;
@@ -181,13 +184,6 @@ h3 {
     transform: translate(calc(var(--x) / var(--d) * 1px), calc(var(--y) / var(--d) * 1px));
   }
 }
-
-.slide__headline {
-  font-size: 3vmin;
-  font-weight: 600;
-  position: relative;
-}
-
 .slide__content {
   --d: 60;
   opacity: 0;

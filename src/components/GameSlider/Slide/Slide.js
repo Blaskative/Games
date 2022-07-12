@@ -24,7 +24,18 @@ export default class Slide extends React.Component {
     }
     
     handleSlideClick(event) {
-      this.props.handleSlideClick(this.props.slide.index)
+      console.log(event)
+      switch (event.detail) {
+        case 1: {
+          this.props.handleSlideClick(this.props.slide.id)
+          break;
+        }
+        case 2: {
+          window.open(this.props.slide.gamerpower_url, '_blank').focus();
+          break;
+        }
+      }
+  
     }
     
     imageLoaded(event) {
@@ -32,13 +43,13 @@ export default class Slide extends React.Component {
     }
     
     render() {
-      const { src, headline, index } = this.props.slide
+      const { image, title, id} = this.props.slide
       const current = this.props.current
       let classNames = 'slide'
       
-      if (current === index) classNames += ' slide--current'
-      else if (current - 1 === index) classNames += ' slide--previous'
-      else if (current + 1 === index) classNames += ' slide--next'
+      if (current === id) classNames += ' slide--current'
+      else if (current - 1 === id) classNames += ' slide--previous'
+      else if (current + 1 === id) classNames += ' slide--next'
           
       return (
         <li 
@@ -51,15 +62,11 @@ export default class Slide extends React.Component {
           <div className="slide__image-wrapper">
             <img 
               className="slide__image"
-              alt={headline}
-              src={src}
+              alt={title}
+              src={image}
               onLoad={this.imageLoaded}
             />
           </div>
-          
-          <article className="slide__content">
-            <h2 className="slide__headline">{headline}</h2>
-          </article>
         </li>
       )
     }

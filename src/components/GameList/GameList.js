@@ -78,8 +78,12 @@ const GameList = () => {
             Number(objB.users) -
             Number(new Date(objA.users))
         );
-        console.log(gamesMostPlayed);
-        setGamesOnline(gamesMostPlayed);
+        let gamesMostPlayedNewIndex = gamesMostPlayed.map((game,index)=>{ 
+          game.id=index;
+          return game;
+        });
+        console.log(gamesMostPlayedNewIndex);
+        setGamesOnline(gamesMostPlayedNewIndex.slice(0, 10) );
       });
     }
     return () => {
@@ -126,7 +130,7 @@ const GameList = () => {
         nextLinkClassName="page-num"
         activeLinkClassName="active"
       />
-      <GameSlider heading="Example Slider" slides={slideData} />
+      <GameSlider heading="Example Slider" slides={gamesOnline} />
     </div>
   );
 };
